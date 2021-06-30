@@ -12,7 +12,9 @@ const port=3000;
 //configuraciones
 app.set('port', process.env.PORT || `${port}`)//toma el puerto configurado o cualquier otro disponible
 
-app.set('views', path.join (__dirname, 'views'));
+app.use(express.static(__dirname + '/public/assets'));
+
+app.set('views', path.join (__dirname, '/public/assets/views'));
 app.engine('.hbs', expresshbs({
   defaultLayout: 'main',
   layoutsDir: path.join(app.get('views'), 'layouts'),
@@ -35,6 +37,9 @@ app.use(expsession({
 app.use(require('./backend/routes/index'));
 app.use(require('./backend/routes/usermgn'));
 
+
+//conexion con mongodb
+require('./db');
 //inicializacion del servidor express
 app.listen(app.get('port'), ()=>{
   console.log('Server en el puerto', app.get('port'));

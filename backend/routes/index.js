@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 router.get('/', (req, res)=>{
-    res.send('Index');
+    res.render('partials/index');
 });  
 
 module.exports=router;
