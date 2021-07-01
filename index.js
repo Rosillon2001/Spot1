@@ -44,6 +44,3 @@ require('./db');
 app.listen(app.get('port'), ()=>{
   console.log('Server en el puerto', app.get('port'));
 });
-
-
-//cambiar de vista con los botones del banner

@@ -14,7 +14,7 @@
     margin-bottom: 500px;
 }
 .title{
-    height: 70px;
+    height: 60px;
     width: 150px;
 }
 
@@ -29,4 +29,9 @@
     margin-left: 15px;
     font-style: italic;
     
+}
+
+#intro{
+    color: aliceblue;
+    text-align: center;
 }

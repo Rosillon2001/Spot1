@@ -1,17 +1,13 @@
 <div class="jumbotron mt-4">
-    <form>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Nombre de Usuario</label>
-            <input type="text" class="form-control" id="input-username">
+    <form action="/register" method="POST">
+        <div class="form-group">
+            <input type="text" name='username' class="form-control" placeholder="username" autofocus>
         </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="input-pass">
+        <div class="form-group">
+            <input type="password" name='password' class="form-control" placeholder="contrseña">
         </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Confirme su contraseña</label>
-            <input type="password" class="form-control" id="input-pass2">
+        <div class="form-group">
+            <button class="btn btn-outline-primary" type="submit">Registrarse</button>
         </div>
-        <button type="submit" class="btn btn-primary">Registrar</button>
-</form>
+    </form>
 </div>
