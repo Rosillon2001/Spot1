@@ -19,10 +19,14 @@
 }
 
 .background{
-    background: #614385;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #26345a, #402d58);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #26345a, #402d58); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    background: linear-gradient(150deg,#263255,#38294b,#301e46 ); 
+	background-size: 800% 100%;
+    animation: Bg 20s ease infinite;
+}
+@keyframes Bg {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
 }
 
 .btn{
@@ -34,4 +38,9 @@
 #intro{
     color: aliceblue;
     text-align: center;
+}
+
+#jumbo-index{
+    height: 600px;
+    width: auto;
 }
