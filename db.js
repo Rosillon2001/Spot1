@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose= require('mongoose');
 
-mongoose.connect('mongodb://localhost/User', {
+mongoose.connect('mongodb://localhost/Melomano', {
     useCreateIndex:true,
     useNewUrlParser:true,
     useFindAndModify: false, 
