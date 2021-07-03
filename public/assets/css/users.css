@@ -1,0 +1,15 @@
+#jumboRegister{
+    height: auto;
+    width: 60vh;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#jumboLogin{
+    height: auto;
+    width: 60vh;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}

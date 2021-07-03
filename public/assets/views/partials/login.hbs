@@ -1,1 +1,29 @@
-<p>login </p>
+<link rel="stylesheet" href="../../css/users.css">
+
+ <div class="jumbotron mt-4 align-items-center " id="jumboLogin">
+
+        <div class="d-flex justify-content-center">
+            <h2>Inicia Sesión</h2>
+        </div>
+
+        <div class="container">
+
+            <form action="/login" method="POST">
+                <h5>Ingrese su nombre de usuario</h5>
+                    <div class="form-group">
+                        <input type="text" name='username' class="form-control" placeholder="Nombre de usuario" autofocus>
+                    </div>
+                <h5>Ingrese su contraseña</h5>
+                    <div class="form-group">
+                        <input type="password" name='password' class="form-control" placeholder="Contraseña">
+                    </div>
+                    
+                    <br>
+                    <div class="d-flex form-group justify-content-center">
+                        <button class="btn btn-outline-primary" type="submit">Inicia Sesión</button>
+                    </div>
+
+            </form>
+
+        </div>
+</div>
