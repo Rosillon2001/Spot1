@@ -19,8 +19,8 @@ router.post('/register', async(req, res)=>{
     //console.log(password);
 
     //consultas
-    const usersDB = await user.find('username: `{$username}`' );
-    console.log(userDB);
+    const usersDB = await user.find({username: `${username}`} );
+    console.log(usersDB);
 
     //manejo de errores y exito
     const errors=[];
