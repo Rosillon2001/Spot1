@@ -1,3 +1,12 @@
+<!-- muestra los errores-->
+{{#each errors}}
+    <div class="d-flex alert alert-danger alert-dismissible fade show justify-content-center align-items-center" role="alert">
+        <strong>{{text}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+{{/each}}
+
 <link rel="stylesheet" href="../../css/users.css">
 
  <div class="jumbotron mt-4 align-items-center " id="jumboLogin">

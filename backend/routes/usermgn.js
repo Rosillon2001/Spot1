@@ -23,8 +23,8 @@ router.post('/register', async(req, res)=>{
     console.log(usersDB);
 
     //manejo de errores y exito
-    const errors=[];
-    const success=[];
+    const errors = [];
+    const success = [];
 
     if(!username){
         errors.push({text: "Por favor ingrese un usuario"});
@@ -35,7 +35,7 @@ router.post('/register', async(req, res)=>{
     if(password!=passwordConf){
         errors.push({text: "Las contraseñas no coinciden"});
     }
-    if(errors.length>=1){
+    if(errors.length >= 1){
         res.render('partials/register',{
             errors
         });
@@ -56,22 +56,44 @@ router.post('/login', async (req, res) => {
     //validacion del usuario para el login
     const usersDB = await user.find({username: `${username}`});
     console.log(usersDB); 
-    let userFlag=0;
+    let userFlag = 0;
+    let passFlag = 0;
+
 
     for(let i=0;i<usersDB.length;i++){
         let userInDB = usersDB[i].username;
-        console.log(userInDB)
+        let passInDB = usersDB[i].password;
+        let typeInDB = usersDB[i].type;
+        
         if(username==userInDB){
             console.log('El usuario existe, iniciando');
-            userFlag=1;
+            console.log(userInDB);
+            userFlag = 1;
         }else{
-            userFlag=0;
+            userFlag = 0;
+        }
+        if(password == passInDB){
+            console.log("password correcta");
+            console.log(passInDB, " == ", password);
+            passFlag = 1;
+        }else{
+            passFlag = 0;
         }
     }
-    if(userFlag==0){
+    if(userFlag == 0){
         console.log('El usuario no existe');
+        errors.push({text : 'El usuario no existe'});
+    }
+    if(passFlag == 0){
+        console.log('password incorrecto');
+        errors.push({text: 'Contrseña incorrecta'});
+    }
+    if(errors.length >= 1){
+        res.render('partials/login',{
+            errors
+        });
     }else{
-        res.render('partials/admin');
+        res.render('partials/admin', {layout:'userLayout'}); //se establece el layout diferente al default
     }
     
 });

@@ -16,7 +16,7 @@ app.use(express.static(__dirname + '/public/assets'));
 
 app.set('views', path.join (__dirname, '/public/assets/views'));
 app.engine('.hbs', expresshbs({
-  defaultLayout: 'main',
+  defaultLayout: 'main',//establece la plantilla predeterminada
   layoutsDir: path.join(app.get('views'), 'layouts'),
   partialsDir: path.join(app.get('views'), 'partials'),
   extname: '.hbs'
