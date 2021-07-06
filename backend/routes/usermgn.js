@@ -1,3 +1,8 @@
+const { response } = require("express");
+var express=require("express");
+var app=express();
+var exphbs  = require('express-handlebars');
+
 const router = require('express').Router();
 
 const user = require('../models/users.js')
@@ -10,7 +15,13 @@ router.get('/register', (req, res)=>{
     res.render('partials/register');
 });
 
+router.get('/user/dash', (req, res) => {
+    res.render('partials/normal');
+})
 
+router.get('/admin/dash', (req, res) => {
+    res.render('partials/admin');
+})
 
 router.post('/register', async(req, res)=>{
     console.log(req.body);
@@ -21,11 +32,24 @@ router.post('/register', async(req, res)=>{
     //consultas
     const usersDB = await user.find({username: `${username}`} );
     console.log(usersDB);
+    var index = 0;
+    for(let i=0;i<usersDB.length;i++){
+        var userInDB = usersDB[i].username;
+        if(username == userInDB){
+            index = i;
+        }else{
+            index = 0;
+        }
+    }
+
 
     //manejo de errores y exito
     const errors = [];
     const success = [];
 
+    if(username == usersDB[index].username){
+        errors.push({text: "El usuario ya existe, por favor ingrese otro"});
+    }
     if(!username){
         errors.push({text: "Por favor ingrese un usuario"});
     }
@@ -46,8 +70,13 @@ router.post('/register', async(req, res)=>{
         await newuser.save();
         res.redirect('/login');
     }
+
+
 });
 
+
+
+var Userid;
 
 router.post('/login', async (req, res) => {
     console.log(req.body);
@@ -58,16 +87,20 @@ router.post('/login', async (req, res) => {
     console.log(usersDB); 
     let userFlag = 0;
     let passFlag = 0;
-
+    var errors = [];
 
     for(let i=0;i<usersDB.length;i++){
+        let userIdBd = usersDB[i]._id;
         let userInDB = usersDB[i].username;
         let passInDB = usersDB[i].password;
-        let typeInDB = usersDB[i].type;
+        var typeInDB = usersDB[i].type;
         
         if(username==userInDB){
             console.log('El usuario existe, iniciando');
+            nombreusuario = username;
+            Userid = userIdBd;
             console.log(userInDB);
+            indexUser = i;
             userFlag = 1;
         }else{
             userFlag = 0;
@@ -93,9 +126,76 @@ router.post('/login', async (req, res) => {
             errors
         });
     }else{
-        res.render('partials/admin', {layout:'userLayout'}); //se establece el layout diferente al default
+        if(typeInDB=="admin"){//vista de admin
+            res.redirect('/admin/dashboard');
+            
+        }else{//vista de usuario normal
+            res.redirect('/normal/dashboard');
+        }
+        
     }
     
 });
+
+router.get('/admin/dashboard', async (req, res) => {
+    const userData = await user.findById(`${Userid}`).lean();
+    console.log('username' , userData.username);
+    console.log('id', userData._id);
+    console.log('type', userData.type);
+    console.log('pass', userData.password);
+
+    res.render('partials/admin', { userData, layout : "UserLayout"});
+
+
+});
+
+router.get('/normal/dashboard', async (req, res) => {
+    const userData = await user.findById(`${Userid}`).lean();
+    console.log('username' , userData.username);
+    console.log('id', userData._id);
+    console.log('type', userData.type);
+    console.log('pass', userData.password);
+
+    res.render('partials/normal', { userData, layout : "UserLayout"});
+});
+
+// router.get('/user/mngmnt',async (req, res) =>{
+//     const userData = await user.findById(`${Userid}`).lean();
+//     console.log('username' , userData.username);
+//     console.log('pass', userData.password);
+
+//     res.render('partials/userMng', { userData, layout : "UserLayout"});
+// });
+
+//mostrar los datos actuales en el form
+router.get('/user/mngmnt/:id', async (req, res) =>{
+    const userData = await user.findById(req.params.id).lean();
+    console.log(userData.username);
+    res.render('partials/userMng',{userData, layout : "UserLayout"});
+});
+
+//actualizar los datos del perfil
+router.post('/user/update/:id', async (req, res) =>{
+    const userData = await user.findById(req.params.id).lean();
+    var type=userData.type;
+    const {username, password} = req.body;
+    await user.findByIdAndUpdate(req.params.id, {username, password});
+    if(type == 'admin'){
+        res.redirect('/admin/dashboard');
+    }else{
+        res.redirect('/normal/dashboard');
+    }
+
+});
+
+//pasar los datos del usuario 
+router.get('/user/data',async (req, res) =>{
+    const userData = await user.findById(`${Userid}`).lean();
+    console.log('username' , userData.username);
+    console.log('pass', userData.password);
+
+    res.send({username : `${userData.username}`});
+});
+
 
 module.exports=router;

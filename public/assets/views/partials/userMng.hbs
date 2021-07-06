@@ -1,0 +1,27 @@
+<div class="jumbotron mt-4 align-items-center " id="jumboUserMng">
+
+        <div class="d-flex justify-content-center">
+            <h2>Datos de la cuenta</h2>
+        </div>
+
+        <div class="container">
+
+            <form action="/user/update/{{userData._id}}" method="POST">
+                <h5>Nombre de usuario</h5>
+                    <div class="form-group">
+                        <input type="text" name='username' class="form-control" placeholder="Nombre de usuario" autofocus value="{{userData.username}}">
+                    </div>
+                <h5>Contraseña</h5>
+                    <div class="form-group">
+                        <input type="password" name='password' class="form-control" placeholder="Contraseña" value="{{userData.password}}">
+                    </div>
+                    
+                    <br>
+                    <div class="d-flex form-group justify-content-center">
+                        <button class="btn btn-outline-primary" type="submit">Guardar Cambios</button>
+                    </div>
+
+            </form>
+
+        </div>
+</div>
