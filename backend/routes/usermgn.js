@@ -42,12 +42,11 @@ router.post('/register', async(req, res)=>{
         }
     }
 
-
     //manejo de errores y exito
     const errors = [];
     const success = [];
 
-    if(username == usersDB[index].username){
+    if(index != 0){
         errors.push({text: "El usuario ya existe, por favor ingrese otro"});
     }
     if(!username){
@@ -138,7 +137,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/admin/dashboard', async (req, res) => {
-    const userData = await user.findById(`${Userid}`);
+    const userData = await user.findById(`${Userid}`).lean();
     console.log('username' , userData.username);
     console.log('id', userData._id);
     console.log('type', userData.type);
@@ -150,7 +149,7 @@ router.get('/admin/dashboard', async (req, res) => {
 });
 
 router.get('/normal/dashboard', async (req, res) => {
-    const userData = await user.findById(`${Userid}`);
+    const userData = await user.findById(`${Userid}`).lean();
     console.log('username' , userData.username);
     console.log('id', userData._id);
     console.log('type', userData.type);
@@ -169,14 +168,14 @@ router.get('/normal/dashboard', async (req, res) => {
 
 //mostrar los datos actuales en el form
 router.get('/user/mngmnt/:id', async (req, res) =>{
-    const userData = await user.findById(req.params.id);
+    const userData = await user.findById(req.params.id).lean();
     console.log(userData.username);
     res.render('partials/userMng',{userData, layout : "UserLayout"});
 });
 
 //actualizar los datos del perfil
 router.post('/user/update/:id', async (req, res) =>{
-    const userData = await user.findById(req.params.id);
+    const userData = await user.findById(req.params.id).lean();
     var type=userData.type;
     const {username, password} = req.body;
     await user.findByIdAndUpdate(req.params.id, {username, password});
@@ -190,7 +189,7 @@ router.post('/user/update/:id', async (req, res) =>{
 
 //pasar los datos del usuario 
 router.get('/user/data',async (req, res) =>{
-    const userData = await user.findById(`${Userid}`);
+    const userData = await user.findById(`${Userid}`).lean();
     console.log('username' , userData.username);
     console.log('pass', userData.password);
 
