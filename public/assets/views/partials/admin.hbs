@@ -1,2 +1,38 @@
-
+<ul class="nav nav-pills nav-fill bg-dark">
+   <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="/admin/dashboard" style="color: rgb(235, 230, 240); border-color:blueviolet;" id="inicio">Inicio</a>
+   </li>
+   <li class="nav-item">
+      <a class="nav-link" href="#" style="color: rgb(235, 230, 240); border-color:blueviolet " id="canciones">Canciones</a>
+   </li>
+   <li class="nav-item">
+      <a class="nav-link" href="#" style="color: rgb(235, 230, 240); border-color:blueviolet " id="playlists">Playlists</a>
+   </li>
+</ul>
    <p> {{userData.password}}</p>
+   <p style="font-size: 99px;">A lot of Shit</p>
+
+<script>
+   var inicio = document.getElementById('inicio');
+   var canciones = document.getElementById('canciones');
+   var playlists = document.getElementById('playlists');
+
+     inicio.onclick = function(){
+         inicio.classList.add('active');
+         canciones.classList.remove('active');    
+         playlists.classList.remove('active');     
+      }
+
+      canciones.onclick = function(){
+         inicio.classList.remove('active');
+         canciones.classList.add('active');    
+         playlists.classList.remove('active');   
+      }
+
+      playlists.onclick = function(){
+         inicio.classList.remove('active');
+         canciones.classList.remove('active');    
+         playlists.classList.add('active');   
+      }
+   
+</script>

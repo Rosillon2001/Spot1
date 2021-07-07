@@ -23,23 +23,20 @@
             
                  <form class="d-flex" action="" method="">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <button class="btn btn-outline-light" style="color: blueviolet; border-color:blueviolet; margin-left:5px"
+                     type="submit">Search</button>
                 </form>
 
             <ul class="nav justify-content-end">
-                <li class="nav-item" id="username">
-                
-                        <p>{{userData.username}}</p>
-                </li>
+                <div class="nav-item d-flex align-items-center" id="username">
+                        <div class="d-flex align-items-center">{{userData.username}}</div>
+                </div>
                 <a href="/user/mngmnt/{{userData._id}}"><i class="bi bi-person-circle" style="font-size: 2rem; color: rgb(110, 31, 163);"></i></a>
-               
-                {{#each rol}}
-                <p>{{text}}</p>
-                {{/each}}
             </ul>
         </div></nav>
     </div>
-    <br><br><br><br>
+
+    <br><br><br>
 
     <main class="container"></main>
     {{{body}}}
