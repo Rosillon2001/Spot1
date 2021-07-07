@@ -126,7 +126,7 @@ router.post('/login', async (req, res) => {
         });
     }else{
         if(typeInDB=="admin"){//vista de admin
-            res.redirect('/admin/dashboard');
+            res.render('partials/admin');
             
         }else{//vista de usuario normal
             res.redirect('/normal/dashboard');
@@ -137,7 +137,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/admin/dashboard', async (req, res) => {
-    const userData = await user.findById(`${Userid}`);
+    const userData = await user.findById(`${Userid}`).lean();
     console.log('username' , userData.username);
     console.log('id', userData._id);
     console.log('type', userData.type);
