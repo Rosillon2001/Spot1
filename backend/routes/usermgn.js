@@ -143,9 +143,7 @@ router.get('/admin/dashboard', async (req, res) => {
     console.log('type', userData.type);
     console.log('pass', userData.password);
 
-    res.render('partials/admin', { userData});
-
-
+    res.render('partials/admin', { userData, layout : "userLayout"});
 });
 
 router.get('/normal/dashboard', async (req, res) => {
@@ -155,7 +153,7 @@ router.get('/normal/dashboard', async (req, res) => {
     console.log('type', userData.type);
     console.log('pass', userData.password);
 
-    res.render('partials/normal', { userData, layout : "UserLayout"});
+    res.render('partials/normal', { userData, layout : "userLayout"});
 });
 
 // router.get('/user/mngmnt',async (req, res) =>{
@@ -170,7 +168,7 @@ router.get('/normal/dashboard', async (req, res) => {
 router.get('/user/mngmnt/:id', async (req, res) =>{
     const userData = await user.findById(req.params.id).lean();
     console.log(userData.username);
-    res.render('partials/userMng',{userData, layout : "UserLayout"});
+    res.render('partials/userMng',{userData, layout : "userLayout"});
 });
 
 //actualizar los datos del perfil
