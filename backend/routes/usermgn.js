@@ -126,7 +126,7 @@ router.post('/login', async (req, res) => {
         });
     }else{
         if(typeInDB=="admin"){//vista de admin
-            res.render('partials/admin');
+            res.redirect('/admin/dashboard');
             
         }else{//vista de usuario normal
             res.redirect('/normal/dashboard');
@@ -143,7 +143,7 @@ router.get('/admin/dashboard', async (req, res) => {
     console.log('type', userData.type);
     console.log('pass', userData.password);
 
-    res.render('partials/admin', { userData, layout : "UserLayout"});
+    res.render('partials/admin', { userData});
 
 
 });
