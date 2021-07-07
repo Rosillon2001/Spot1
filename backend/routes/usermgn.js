@@ -137,7 +137,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/admin/dashboard', async (req, res) => {
-    const userData = await user.findById(`${Userid}`).lean();
+    const userData = await user.findById(`${Userid}`);
     console.log('username' , userData.username);
     console.log('id', userData._id);
     console.log('type', userData.type);
