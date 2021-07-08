@@ -5,6 +5,8 @@ const path=require('path');
 const expresshbs=require('express-handlebars');
 const methOverr=require('method-override');
 const expsession=require('express-session');
+const flash=require('connect-flash');
+
 
 const app=express();
 const port=3000;
@@ -24,6 +26,9 @@ app.engine('.hbs', expresshbs({
 }));
 app.set('view engine', '.hbs');
 
+//app.use(morgan('dev'));
+//app.use(cors());
+
 //Middlewares
 app.use(express.urlencoded({extended:false}));
 app.use(methOverr('_method'));
@@ -33,9 +38,20 @@ app.use(expsession({
   saveUninitialized: true
 }));
 
+app.use(flash());
+
+//variable flash global para los mensajes
+app.use((req, res, next) =>{
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+
+  next();
+})
+
 //rutas de acceso
 app.use(require('./backend/routes/index'));
 app.use(require('./backend/routes/usermgn'));
+app.use(require('./backend/routes/admin'));
 
 
 //conexion con mongodb

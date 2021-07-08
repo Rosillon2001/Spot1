@@ -1,0 +1,41 @@
+
+<!-- Formulario para ingreso de la cancion -->
+<div class="jumbotron mt-4 align-items-center " id="jumboLogin">
+
+        <div class="d-flex justify-content-center">
+            <h2>Agregar una Cancion</h2>
+        </div>
+
+        <div class="container">
+
+            <form action="/admin/pSong" method="POST">
+                <h5>Ingrese el nombre de la cancion</h5>
+                    <div class="form-group">
+                        <input type="text" name='name' class="form-control" placeholder="Nombre de la cancion" autofocus>
+                    </div>
+                <h5>Ingrese el autor</h5>
+                    <div class="form-group">
+                        <input type="text" name='author' class="form-control" placeholder="Contraseña">
+                    </div>
+                <h5>Ingrese el genero</h5>
+                    <div class="form-group">
+                        <input type="text" name='gender' class="form-control" placeholder="Contraseña">
+                    </div>
+                <h5>Ingrese el album</h5>
+                    <div class="form-group">
+                        <input type="text" name='album' class="form-control" placeholder="Contraseña">
+                    </div>
+                <h5>Ingrese la ruta de la cancion</h5>
+                    <div class="form-group">
+                        <input type="text" name='route' class="form-control" placeholder="Contraseña">
+                    </div>
+                    <br>
+                    <div class="d-flex form-group justify-content-center">
+                        <button class="btn btn-outline-primary" type="submit">Guardar Cnacion</button>
+                    </div>
+
+            </form>
+
+        </div>
+</div>
+
