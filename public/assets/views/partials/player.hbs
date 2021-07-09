@@ -1,0 +1,25 @@
+ <link rel="stylesheet" href="../../css/users.css"/>
+ 
+ <div class="container d-flex justify-content-center"id="player" > Now Playing...<p id="lasong">{{cancion}}</p>
+ <audio style="width: 100vw;" id="panel" controls>
+      <source src="../../Canciones/{{laCancion}}" type="audio/mp3">
+</audio>
+</div>
+
+<script>
+    cancionActual();
+    function cancionActual(){
+        const cache;
+  var cancion = document.getElementById('lasong');
+  var contenido = cancion.innerHTML;
+  if(contenido === ''){
+      console.log('vacio pa');
+  }else{
+      const last = [];
+      console.log("playing-> ", contenido);
+      last.push(contenido);
+      cache = last;
+  }
+  console.log(cache);
+}
+</script>

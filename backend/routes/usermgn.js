@@ -1,4 +1,5 @@
-
+const express = require('express');
+const session = require('express-session');
 const router = require('express').Router();
 
 const user = require('../models/users')
@@ -80,21 +81,29 @@ router.post('/login', async (req, res) => {
     //se crea la instancia del usuario 
     //validacion del usuario para el login
     const usersDB = await user.findOne({username: `${username}`});
-    const verif = await usersDB.matchPass(password);
-    console.log(verif);
-    console.log(usersDB); 
+    console.log(usersDB);
     let userFlag = 0;
     let passFlag = 0;
+    var nouser = 0;
     var errors = [];
 
-        let userIdBd = usersDB._id;
-        let userInDB = usersDB.username;
-        let passInDB = usersDB.password;
+    if(usersDB == null){
+        nouser = 1; 
+    }else{
+        nouser = 0;
+    }
+
+    if(nouser == 0){
+        var userIdBd = usersDB._id;
+        var userInDB = usersDB.username;
+        var passInDB = usersDB.password;
         var typeInDB = usersDB.type;
-        
+        const verif = await usersDB.matchPass(password);
+     
         if(username == userInDB){
             console.log('El usuario existe, iniciando');
-            nombreusuario = username;
+            console.log(verif);
+            console.log(usersDB); 
             Userid = userIdBd;
             console.log(userInDB);
             userFlag = 1;
@@ -108,6 +117,8 @@ router.post('/login', async (req, res) => {
         }else{
             passFlag = 0;
         }
+    }else{
+    }
     
     if(userFlag == 0){
         console.log('El usuario no existe');
@@ -125,13 +136,17 @@ router.post('/login', async (req, res) => {
         if(typeInDB=="admin"){//vista de admin
             res.redirect('/admin/dashboard');
             req.flash('success', 'Iniciando Sesion-Admin');
+            req.sessionID;
+            //console.log('session id',req.sessionID);
             
         }else{//vista de usuario normal
             res.redirect('/normal/dashboard');
             req.flash('success', 'Iniciando Sesion-Usuario');
+            req.sessionID;
         }
         
     }
+ 
     
 });
 

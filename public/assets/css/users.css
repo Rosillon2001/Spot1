@@ -47,4 +47,9 @@
 }
 
 
+#player{
+    background-color: antiquewhite;
+    max-width: fit-content;
+}
+
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");

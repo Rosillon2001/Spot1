@@ -22,17 +22,16 @@ router.get('/admin/allSongs' , async (req, res) => {
     const songs = await song.find().lean();
     console.log(songs);
     //
-    res.render('partials/admin', {songs , layout: 'userLayout'});
+    res.render('partials/allSongs', {songs , layout: 'userLayout'});
 
 });
 
 router.get('/playSong/:nombre', (req, res) => {
-    var route = 'Canciones/';
     var ext = '.mp3';
     var cancion = req.params.nombre;
-    var laCancion = route.concat(cancion);
+    var laCancion = cancion.concat(ext);
     console.log(req.params.nombre);
-    res.render('partials/admin', {laCancion , layout: 'userLayout'})
+    res.render('partials/player', {laCancion, cancion , layout: 'userLayout'})
 });
 
 
