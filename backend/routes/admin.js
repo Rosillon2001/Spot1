@@ -1,7 +1,6 @@
 const router = require('express').Router();
 var fs = require('fs');
 var path = require('path');
-var ms = require('mediaserver');
 
 const user = require('../models/users.js');
 const song = require('../models/songs.js');
