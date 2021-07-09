@@ -55,7 +55,7 @@ router.post('/register', async(req, res)=>{
         errors.push({text: "Las contraseñas no coinciden"});
     }
     if(errors.length >= 1){
-        res.render('partials/register',{
+        res.status(500).render('partials/register',{
             errors
         });
     }
@@ -64,7 +64,7 @@ router.post('/register', async(req, res)=>{
         const newuser = new user({username, password, type});
         newuser.password = await newuser.encryptPass(password);
         await newuser.save();
-        res.redirect('/login');
+        res.status(200).redirect('/login');
     }
 
 
@@ -137,20 +137,20 @@ router.post('/login', async (req, res) => {
 
 router.get('/admin/dashboard', async (req, res) => {
     const userData = await user.findById(`${Userid}`).lean();
-    console.log('username' , userData.username);
-    console.log('id', userData._id);
-    console.log('type', userData.type);
-    console.log('pass', userData.password);
+    // console.log('username' , userData.username);
+    // console.log('id', userData._id);
+    // console.log('type', userData.type);
+    // console.log('pass', userData.password);
 
     res.render('partials/admin', { userData, layout : "userLayout"});
 });
 
 router.get('/normal/dashboard', async (req, res) => {
     const userData = await user.findById(`${Userid}`).lean();
-    console.log('username' , userData.username);
-    console.log('id', userData._id);
-    console.log('type', userData.type);
-    console.log('pass', userData.password);
+    // console.log('username' , userData.username);
+    // console.log('id', userData._id);
+    // console.log('type', userData.type);
+    // console.log('pass', userData.password);
 
     res.render('partials/normal', { userData, layout : "userLayout"});
 });
@@ -166,7 +166,7 @@ router.get('/normal/dashboard', async (req, res) => {
 //mostrar los datos actuales en el form
 router.get('/user/mngmnt/:id', async (req, res) =>{
     const userData = await user.findById(req.params.id).lean();
-    console.log(userData.username);
+    //console.log(userData.username);
     res.render('partials/userMng',{userData, layout : "userLayout"});
 });
 
@@ -178,9 +178,9 @@ router.post('/user/update/:id', async (req, res) =>{
     password = await userData.encryptPass(password);
     await user.findByIdAndUpdate(req.params.id, {username, password});
     if(type == 'admin'){
-        res.redirect('/admin/dashboard');
+        res.status(200).redirect('/admin/dashboard');
     }else{
-        res.redirect('/normal/dashboard');
+        res.status(200).redirect('/normal/dashboard');
     }
 
 });
@@ -188,8 +188,8 @@ router.post('/user/update/:id', async (req, res) =>{
 //pasar los datos del usuario 
 router.get('/user/data',async (req, res) =>{
     const userData = await user.findById(`${Userid}`).lean();
-    console.log('username' , userData.username);
-    console.log('pass', userData.password);
+    //console.log('username' , userData.username);
+    //console.log('pass', userData.password);
 
     res.send({userData});
 });

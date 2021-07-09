@@ -1,6 +1,6 @@
 <ul class="nav nav-pills nav-fill bg-dark">
    <li class="nav-item">
-      <a class="nav-link" aria-current="page" href="/admin/dashboard" style="color: rgb(235, 230, 240); border-color:blueviolet;" id="inicio">Inicio</a>
+      <a class="nav-link" href="/admin/dashboard" style="color: rgb(235, 230, 240); border-color:blueviolet;" id="inicio">Inicio</a>
    </li>
    <li class="nav-item">
       <a class="nav-link" href="/admin/pSong" style="color: rgb(235, 230, 240); border-color:blueviolet " id="canciones">Subir Canciones</a>
@@ -10,22 +10,4 @@
    </li>
 </ul>
 
-<script defer>
-   var inicio = document.getElementById('inicio');
-   var canciones = document.getElementById('canciones');
-   var playlists = document.getElementById('playlists');
-
-     inicio.onclick = function(){
-         inicio.classList.add('active');
-      }
-
-      canciones.onclick = function(){
-         canciones.classList.add('active');    
-
-      }
-
-      playlists.onclick = function(){
-         playlists.classList.add('active');   
-      }
-   
-</script>
+<script src="../../js/user.js"></script>

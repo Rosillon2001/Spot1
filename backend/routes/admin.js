@@ -1,4 +1,7 @@
 const router = require('express').Router();
+var fs = require('fs');
+var path = require('path');
+var ms = require('mediaserver');
 
 const user = require('../models/users.js');
 const song = require('../models/songs.js');
@@ -17,8 +20,21 @@ router.post('/admin/pSong', async (req, res) => {
 });
 
 router.get('/admin/allSongs' , async (req, res) => {
-    const songs = await song.find();
+    const songs = await song.find().lean();
+    console.log(songs);
+    //
     res.render('partials/admin', {songs , layout: 'userLayout'});
+
 });
+
+router.get('/playSong/:nombre', (req, res) => {
+    var route = 'Canciones/';
+    var ext = '.mp3';
+    var cancion = req.params.nombre;
+    var laCancion = route.concat(cancion);
+    console.log(req.params.nombre);
+    res.render('partials/admin', {laCancion , layout: 'userLayout'})
+});
+
 
 module.exports = router;
