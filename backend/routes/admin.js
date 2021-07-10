@@ -31,7 +31,7 @@ router.get('/playSong/:nombre', (req, res) => {
     var cancion = req.params.nombre;
     var laCancion = cancion.concat(ext);
     console.log(req.params.nombre);
-    res.render('partials/player', {laCancion, cancion , layout: 'userLayout'})
+    res.render('partials/admin', {laCancion, cancion , layout: 'userLayout'})
 });
 
 
