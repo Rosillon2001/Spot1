@@ -1,13 +1,13 @@
  <link rel="stylesheet" href="../../css/users.css"/>
  
- <div class="container d-flex justify-content-center"id="player" > Now Playing...<div id="lasong">{{cancion}}</div>
- <audio style="width: 100vw;" id="panel" controls>
-      <source src="../../Canciones/{{laCancion}}" type="audio/mp3" id="rep">
-</audio>
+ <div class="container" id="player" style="width:100vw"> <abbr class="d-flex justify-content-center" id='nowPlaying'> Now Playing...</abbr><div class="d-flex justify-content-center" id="lasong">{{cancion}}</div>
+    <audio class="d-flex justify-content-center"  style="width: 95vw;" id="panel" controls>
+          <source src="../../Canciones/{{laCancion}}" type="audio/mp3" id="rep">
+    </audio>
 </div>
 
 <script>
-
+//trabajo el sessionStorage como un buffer o cache para que no se cambie la cancion al cambiar de vista
     cancionActual();
     function cancionActual(){
   var cancion = document.getElementById('lasong');

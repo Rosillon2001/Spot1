@@ -1,3 +1,4 @@
+<h1 class="presentacion">Estas son las Canciones del mundo Melomano</h1>
 <div class="jumbotron-mt-4">
 <div class=" row  row-cols-md-4 " style="padding: 20px;">
 {{#each songs }}
@@ -5,8 +6,9 @@
       <div class="card " style="margin-bottom: 20px;">
       <div class="d-flex justify-content-center bg-dark"><h5 class="card-header " id="noombreCancion" style="color: whitesmoke;">{{name}}</h5></div>
       <div class="card-body ">
-         <h5 class="card-title d-flex justify-content-center">{{author}}</h5>
-         <p class="card-text d-flex justify-content-center">{{album}}-{{gender}}</p>
+         <h5 class="card-title d-flex justify-content-center">Autor: {{author}}</h5>
+         <p class="card-text d-flex justify-content-center">Album: {{album}}</p>
+         <p class="card-text d-flex justify-content-center">Género: {{gender}}</p>
          <a href="/playSong/{{name}}" class="btn btn-primary d-flex justify-content-center" id="playBtn">Play<i class="bi bi-play-circle" style="margin-left: 7px;"></i></a>
       </div>
       </div>
@@ -14,4 +16,5 @@
 {{/each}}
 </div>
 </div>
+<link rel="stylesheet" href="../../css/users.css"/>
 <script src="../../js/user.js"></script>

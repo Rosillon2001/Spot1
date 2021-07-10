@@ -2,7 +2,8 @@ const express = require('express');
 const session = require('express-session');
 const router = require('express').Router();
 
-const user = require('../models/users')
+const user = require('../models/users');
+const songs = require('../models/songs');
 
 router.get('/login', (req, res)=>{
     res.render('partials/login')
@@ -138,15 +139,15 @@ router.post('/login', async (req, res) => {
             req.flash('success', 'Iniciando Sesion-Admin');
             req.session.name = `${username}`;
             req.session._id = usersDB._id;
-            console.log('session id',req.session.name, req.session._id);
+           // console.log('session id',req.session.name, req.session._id);
             
             
         }else{//vista de usuario normal
-            res.redirect('/normal/dashboard');
+            res.redirect('/admin/dashboard');//pendiente las vistas de user normal  
             req.flash('success', 'Iniciando Sesion-Usuario');
             req.session.name = `${username}`;
             req.session._id = usersDB._id;
-            console.log('session id', req.session.name, req.session._id);
+            //console.log('session id', req.session.name, req.session._id);
         }
         
     }
@@ -156,12 +157,13 @@ router.post('/login', async (req, res) => {
 
 router.get('/admin/dashboard', async (req, res) => {
     const userData = await user.findById(`${Userid}`).lean();
+    const songData = await songs.find({uploader : `${userData._id}`}).lean(); //obtiene las canciones subidas por el usuario
     // console.log('username' , userData.username);
     // console.log('id', userData._id);
     // console.log('type', userData.type);
     // console.log('pass', userData.password);
 
-    res.render('partials/admin', { userData, layout : "userLayout"});
+    res.render('partials/admin', { userData, songData, layout : "userLayout"});
 });
 
 router.get('/normal/dashboard', async (req, res) => {
@@ -171,7 +173,7 @@ router.get('/normal/dashboard', async (req, res) => {
     // console.log('type', userData.type);
     // console.log('pass', userData.password);
 
-    res.render('partials/normal', { userData, layout : "userLayout"});
+    res.render('partials/admin', { userData, layout : "userLayout"});
 });
 
 // router.get('/user/mngmnt',async (req, res) =>{
@@ -199,7 +201,7 @@ router.post('/user/update/:id', async (req, res) =>{
     if(type == 'admin'){
         res.status(200).redirect('/admin/dashboard');
     }else{
-        res.status(200).redirect('/normal/dashboard');
+        res.status(200).redirect('/admin/dashboard'); //pendiente terminar la vista independiente de usuario normal
     }
 
 });

@@ -1,3 +1,14 @@
+@font-face {
+    font-family: lit;
+    src: url(../fonts/Oxanium-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: vice;
+    src: url(../fonts/Monoton-Regular.ttf);
+}
+body{
+    overflow-x: hidden;
+}
 #jumboRegister{
     height: auto;
     width: 60vh;
@@ -48,8 +59,36 @@
 
 
 #player{
-    background-color: antiquewhite;
+    border-radius: 15px;
+    padding: 20px;
+    background:linear-gradient(150deg,#4b6fdb,#53dbd0,#d44172, #654191, #e0b867); 
+	background-size: 800% 100%;
+    animation: Bg 20s ease infinite;
     max-width: fit-content;
+}
+
+.presentacion{
+    font-family: vice;
+    color: aliceblue;
+    word-spacing: 15px;
+    justify-content: center;
+    text-align: center;
+}
+#abUser{
+    color: rgb(252, 10, 191);
+
+}
+#nowPlaying{
+    font-size: 16px;
+    font-style: oblique;
+    font-weight: bolder;
+    font-family: lit;
+}
+#lasong{
+    font-size: 30px;
+    font-style: italic;
+    font-weight: bolder;
+    font-family: lit;
 }
 
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
