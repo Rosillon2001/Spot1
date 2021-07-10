@@ -11,7 +11,6 @@
     position: absolute;
     min-width: 100%;
     background-color: rgb(0, 0, 0);
-    margin-bottom: 500px;
 }
 .title{
     height: 60px;
@@ -38,6 +37,7 @@
 #intro{
     color: aliceblue;
     text-align: center;
+    justify-content: center;
 }
 
 #jumbo-index{

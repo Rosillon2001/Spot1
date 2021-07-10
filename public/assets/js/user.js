@@ -1,4 +1,4 @@
-window.onload = datos;
+window.onload = datos, id;
 
 function datos(){
     fetch('/user/data',{
@@ -10,6 +10,7 @@ function datos(){
         // console.log(data.userData.username);
         // console.log(data.userData.type);
         navUser(data.userData.username, data.userData._id);
+        id(data.userData._id);
     })
     .catch(error =>console.log('ERROR', error));
 }
@@ -20,6 +21,10 @@ function navUser(username, id){
     var icon = document.getElementById('userIcon');
     icon.setAttribute('href',`/user/mngmnt/${id}`);
     tag.innerHTML=username;
+}
+function id(id){
+  var up = document.getElementById('up');
+  up.setAttribute('value', `${id}`);
 }
 
 //funcionalidad del navbar

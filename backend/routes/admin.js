@@ -1,6 +1,5 @@
 const router = require('express').Router();
-var fs = require('fs');
-var path = require('path');
+const session = require('express-session');
 
 const user = require('../models/users.js');
 const song = require('../models/songs.js');
@@ -12,8 +11,9 @@ router.get('/admin/pSong',async (req, res) => {
 
 router.post('/admin/pSong', async (req, res) => {
     console.log(req.body);
-    const {name, author, album, gender, route} = req.body;
-    const newSong = new song({name, author, album, gender, route});
+    const {name, author, album, gender, uploader} = req.body;
+    console.log(uploader);
+    const newSong = new song({name, author, album, gender, uploader});
     await newSong.save();
     res.redirect('/admin/dashboard');
 });

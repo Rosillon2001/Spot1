@@ -1,25 +1,32 @@
  <link rel="stylesheet" href="../../css/users.css"/>
  
- <div class="container d-flex justify-content-center"id="player" > Now Playing...<p id="lasong">{{cancion}}</p>
+ <div class="container d-flex justify-content-center"id="player" > Now Playing...<div id="lasong">{{cancion}}</div>
  <audio style="width: 100vw;" id="panel" controls>
-      <source src="../../Canciones/{{laCancion}}" type="audio/mp3">
+      <source src="../../Canciones/{{laCancion}}" type="audio/mp3" id="rep">
 </audio>
 </div>
 
 <script>
+
     cancionActual();
     function cancionActual(){
-        const cache;
   var cancion = document.getElementById('lasong');
   var contenido = cancion.innerHTML;
+  var rep = document.getElementById('rep');
+  var ext = '.mp3';
+  var arch;
+  var ls;
   if(contenido === ''){
       console.log('vacio pa');
+      cancion.innerHTML = sessionStorage.getItem('cancion');
+      arch = sessionStorage.getItem('cancion').concat(ext);
+      rep.setAttribute('src', `../../Canciones/${arch}`);
+
+      console.log(arch);
   }else{
-      const last = [];
       console.log("playing-> ", contenido);
-      last.push(contenido);
-      cache = last;
+        sessionStorage.setItem('cancion', contenido);
   }
-  console.log(cache);
+
 }
 </script>

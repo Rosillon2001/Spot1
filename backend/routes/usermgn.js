@@ -136,13 +136,17 @@ router.post('/login', async (req, res) => {
         if(typeInDB=="admin"){//vista de admin
             res.redirect('/admin/dashboard');
             req.flash('success', 'Iniciando Sesion-Admin');
-            req.sessionID;
-            //console.log('session id',req.sessionID);
+            req.session.name = `${username}`;
+            req.session._id = usersDB._id;
+            console.log('session id',req.session.name, req.session._id);
+            
             
         }else{//vista de usuario normal
             res.redirect('/normal/dashboard');
             req.flash('success', 'Iniciando Sesion-Usuario');
-            req.sessionID;
+            req.session.name = `${username}`;
+            req.session._id = usersDB._id;
+            console.log('session id', req.session.name, req.session._id);
         }
         
     }
@@ -198,6 +202,19 @@ router.post('/user/update/:id', async (req, res) =>{
         res.status(200).redirect('/normal/dashboard');
     }
 
+});
+
+//eliminar usuario
+router.delete('/user/delete/:id', async (req, res) =>{
+    const idToDelete = req.params.id;
+    await user.remove({_id: `${idToDelete}`});
+    res.status(200).redirect('/');
+});
+
+//cerrar sesion
+router.get('/user/logout', async (req, res) =>{
+    req.session.destroy();
+    res.redirect('/login');
 });
 
 //pasar los datos del usuario 
